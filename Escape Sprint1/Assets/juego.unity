@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 41935615}
   - component: {fileID: 41935614}
   m_Layer: 0
-  m_Name: Grid (1)
+  m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,10 +136,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camara: {fileID: 761972512}
-  hab_final: {fileID: 1016369458256960, guid: 5e338bddb62d35e4084cd102e2902c52, type: 2}
+  hab_final: {fileID: 1482562895686880, guid: b9f8d18ec80b93a448a66c366f340d50, type: 2}
   hab_inicio: {fileID: 1513717514175538, guid: 4b87d236e44034846ab043102496091f, type: 2}
   hab_3: {fileID: 1049087088546864, guid: 994a8cd1ac40c8a4aa35b3ce07ee72ce, type: 2}
   hab_4: {fileID: 1673815257690184, guid: 9fb61b40a943e3543ab8113cdb368ad0, type: 2}
+  pilaTargHab: 
+  posActHab: 0
 --- !u!4 &41935615
 Transform:
   m_ObjectHideFlags: 0
