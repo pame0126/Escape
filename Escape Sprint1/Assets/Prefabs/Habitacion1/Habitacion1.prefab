@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33494313532038144}
   - component: {fileID: 23908837932166664}
   - component: {fileID: 64238199853601628}
+  - component: {fileID: 114789680979274008}
   m_Layer: 0
   m_Name: Habitacion1
   m_TagString: Untagged
@@ -38,7 +39,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4094470849678126}
   - component: {fileID: 65135308259598636}
-  - component: {fileID: 114682575227148236}
   m_Layer: 0
   m_Name: Verificar salida
   m_TagString: Untagged
@@ -138,14 +138,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.9892902, y: 1.6734276, z: 0}
   m_Center: {x: -0.46112823, y: -0.3367138, z: -0.5}
---- !u!114 &114682575227148236
+--- !u!114 &114789680979274008
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1632657515879496}
+  m_GameObject: {fileID: 1016369458256960}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5192db422e486ad448f7a6ec0d4c4b15, type: 3}
+  m_Script: {fileID: 11500000, guid: 8dce7211475bb7d4ebed743e57bbe226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
