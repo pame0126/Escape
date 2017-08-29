@@ -4,183 +4,233 @@ using UnityEngine;
 
 public class JasonHasHere : MonoBehaviour {
 
-    //
-    //public GameObject[] prefabs;
-    //public GameObject prefab;
+
     public FollowTarget camara;
-    private List<List<GameObject>> grid;
-    private int x = 9, y = 9;
-    private float tamano = 10;
     public GameObject hab_final;
     public GameObject hab_inicio;
     public GameObject hab_3;
     public GameObject hab_4;
-   
+
+    
+    //matriz de GameObject
+    public GameObject[][] grid = new GameObject[20][];
+    //pila de numeros que son los tipos de habitaciones que hay
+    public List<int> pilaTargHab = new List<int>();
+    public int posActHab = 0;
+
+    
+    private float tamano = 10;
+
+    //no se usa
+    private int x = 9, y = 9;
+
+    
     private int randomHab;
 
-   
-
-    void Awake()
+    
+    public void CrearPilaHabitaciones()
     {
+        //inicio
+        pilaTargHab.Add(1);
+        //hab tres_P_LL
+        pilaTargHab.Add(2);
+        pilaTargHab.Add(2);
+        //hab tres_P_A
+        pilaTargHab.Add(3);
+        pilaTargHab.Add(3);
+        //hab tres_P_G
+        for (int i = 0; i < 6; i++)
+        {
+            pilaTargHab.Add(4);
+        }
+        //hab cuatro P
+        for (int i = 0; i < 7; i++)
+        {
+            pilaTargHab.Add(5);
+        }
+        //final
+        pilaTargHab.Add(6);
+    }
 
-        //GameObject hab_inicio = (GameObject)Instantiate(Resources.Load("Prefabs/Habitacion2/Habitacion2"));
-        //GameObject hab_final = (GameObject)Instantiate(Resources.Load("Prefabs/Habitacion1/Habitacion1"));
+    /**
+     * Recuperado y modificado de: 
+     * http://answers.unity3d.com/questions/486626/how-can-i-shuffle-alist.html?childToView=948088#answer-948088
+     */
 
-        
+    public static List<int> ShufflePilaHabitaciones(List<int> aList)
+    {
+        System.Random _random = new System.Random();
 
-        grid = new List<List<GameObject>>();
+        int myGO;
 
+        int n = aList.Count;
+        for (int i = 1; i < n; i++)
+        {
+            // NextDouble returns a random number between 0 and 1.
+            // ... It is equivalent to Math.random() in Java.
+            int r = i + (int)(_random.NextDouble() * (n - i));
+            myGO = aList[r];
+            aList[r] = aList[i];
+            aList[i] = myGO;
+        }
+
+        return aList;
+    }
+    
+    public void CreaMatriz()
+    {
         for (int i = 0; i < 20; i++)
         {
-            //Quaternion rot = Quaternion.EulerAngles(0, 90, 0);
-            //GameObject cosa = (GameObject)Instantiate(Resources.Load("MiCosa"), transform.position + Vector3.zero, Quaternion.identity, transform);
-
-            List<GameObject> row = new List<GameObject>();
-
-
-
-            for (int j = 0; j < 20; j++)
-            {
-                //GameObject prefab = prefabs[Random.Range(0, 5)];
-                //GameObject obj = Instantiate(hab_final);
-                //bj.transform.SetParent(this.transform);
-                if (i == 9 && j == 9)
-                {
-                    GameObject objI = Instantiate(hab_inicio);
-                    objI.transform.SetParent(this.transform);
-                    objI.GetComponent<MeshRenderer>().enabled = true;
-                    objI.transform.localPosition = new Vector3((float)j * tamano, 0f, -(float)i * tamano);
-                    row.Add(objI);
-                    
-                }
-                else
-                {
-                    randomHab = Random.Range(1, 3);
-                    switch (randomHab)
-                    {
-                        case 1:
-                            GameObject objF = Instantiate(hab_final);
-                            objF.transform.SetParent(this.transform);
-                            objF.GetComponent<MeshRenderer>().enabled = false;
-                            objF.transform.localPosition = new Vector3((float)j * tamano, 0f, -(float)i * tamano);
-                            row.Add(objF);
-                            break;
-                        case 2:
-                            GameObject obj3 = Instantiate(hab_3);
-                            obj3.transform.SetParent(this.transform);
-                            obj3.GetComponent<MeshRenderer>().enabled = false;
-                            obj3.transform.localPosition = new Vector3((float)j * tamano, 0f, -(float)i * tamano);
-                            row.Add(obj3);
-                            break;
-                        case 3:
-                            GameObject obj4 = Instantiate(hab_4);
-                            obj4.transform.SetParent(this.transform);
-                            obj4.GetComponent<MeshRenderer>().enabled = false;
-                            obj4.transform.localPosition = new Vector3((float)j * tamano, 0f, -(float)i * tamano);
-                            row.Add(obj4);
-                            break;
-
-                    }
-                    /*
-                    obj.GetComponent<MeshRenderer>().enabled = false;
-                    obj.transform.localPosition = new Vector3((float)j * tamano, 0f, -(float)i * tamano);
-                    row.Add(obj);
-                    */
-                }
-
-
-            }
-
-            grid.Add(row);
+            grid[i] = new GameObject[20];
         }
-        //grid[9][9].GetComponent<MeshRenderer> ().enabled = true;
+    }
+   
 
-        camara.target = grid[9][9].transform;
+    public GameObject CreaHabitacion(int id)
+    {
+        GameObject tipo = null ;
+        switch (id)
+        {
+            case 1://inicio
+                tipo = Instantiate(hab_inicio);
+                break;
+
+            case 2://3 puertas - //hab tres_P_LL
+                tipo = Instantiate(hab_3);
+                break;
+            case 3://3 puertas - //hab tres_P_A
+                tipo = Instantiate(hab_3);
+                break;
+            case 4://3 puertas - //hab tres_P_G
+                tipo = Instantiate(hab_3);
+                break;
+
+            case 5://4 puertas - //hab cuatro P
+                tipo = Instantiate(hab_4);
+                break;
+
+            case 6://final
+                tipo = Instantiate(hab_final);
+                break;
+            default:
+                tipo = Instantiate(hab_final);
+                break;
+        }
+        return tipo;
     }
 
 
+    public void CreaHabitacionInicio()
+    {
+        GameObject obj = CreaHabitacion(pilaTargHab[posActHab]);
+        //tomar la posicion i de la lista
+        GameObject objI = obj;
+        objI.transform.SetParent(this.transform);
+        objI.GetComponent<MeshRenderer>().enabled = true;
+        
+        objI.transform.localPosition = new Vector3((float)9 * tamano, 0f, -(float)9 * tamano);
+        
+        grid[9][9] = objI;
+        //agregar a la lista habitaciones
+        
+        //ubicar camara en posicion inicio
+        camara.target = grid[9][9].transform;
 
+        posActHab++;    
+    }
 
+    public void InstanciaHabitacion(int a, int b)
+    {
+        
+        if (grid[a][b] == null && posActHab < 19)
+        {
+            //tomar la posicion i de la lista
+            int tipoHab = pilaTargHab[posActHab];
+            GameObject obj = CreaHabitacion(tipoHab);
+            GameObject objI = obj;
+            objI.transform.SetParent(this.transform);
+            objI.GetComponent<MeshRenderer>().enabled = true;
+            objI.transform.localPosition = new Vector3((float)b * tamano, 0f, -(float)a * tamano);
+            grid[a][b] = objI;
+
+            posActHab++;
+            
+        }
+    }
+
+    void Awake()
+    {
+        //pila
+        CrearPilaHabitaciones();
+        pilaTargHab = ShufflePilaHabitaciones(pilaTargHab);
+
+        //matriz grid
+        CreaMatriz();
+        CreaHabitacionInicio();
+        camara.target = grid[9][9].transform;
+    }
+
+    
     void Update()
     {
-
+        //posicion inicial
         int a = x;
         int b = y;
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))//arriba
         {
-
-
-
-            grid[a][b].GetComponent<MeshRenderer>().material.color = Color.white;
-
             a--;
-            a = Mathf.Clamp(a, 0, 19);
+            //a = Mathf.Clamp(a, 0, 19);
+            a = ((a < 0) ? a + 1 : a);
 
+            InstanciaHabitacion(a, b);//solo instancia si todavia hay tarjetas en la pila
 
-            grid[a][b].GetComponent<MeshRenderer>().enabled = true;
-            //gira habitacion
-            grid[a][b].GetComponent<Transform>().Rotate(0, 0, 90);
-            grid[a][b].GetComponent<MeshRenderer>().material.color = Color.green;
-            camara.target = grid[a][b].transform;
+            //solo se mueve la camara por habitaciones creadas
+            camara.target = (grid[a][b] == null) ? camara.target : grid[a][b].transform;
+
             x = a;
             y = b;
         }
 
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))//abajo
         {
-
-            grid[a][b].GetComponent<MeshRenderer>().material.color = Color.white;
-
-
             a++;
-            a = Mathf.Clamp(a, 0, 19);
+            //a = Mathf.Clamp(a, 0, 19);
+            a = (a % 19 == 0) ? a - 1 : a;
 
-            grid[a][b].GetComponent<MeshRenderer>().enabled = true;
-            grid[a][b].GetComponent<Transform>().Rotate(0, 0, 90);
+            InstanciaHabitacion(a, b);//solo instancia si todavia hay tarjetas en la pila
+            //solo se mueve la camara por habitaciones creadas
+            camara.target = (grid[a][b] == null) ? camara.target : grid[a][b].transform;
 
-            grid[a][b].GetComponent<MeshRenderer>().material.color = Color.green;
-
-
-            camara.target = grid[a][b].transform;
             x = a;
             y = b;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))//izquierda
         {
-
-            grid[a][b].GetComponent<MeshRenderer>().material.color = Color.white;
-
-
             b--;
-            b = Mathf.Clamp(b, 0, 19);
+            //b = Mathf.Clamp(b, 0, 19);
+            b = ((b < 0) ? b + 1 : b);
 
-            grid[a][b].GetComponent<MeshRenderer>().enabled = true;
+            InstanciaHabitacion(a, b);//solo instancia si todavia hay tarjetas en la pila
+                                      //solo se mueve la camara por habitaciones creadas
+            camara.target = (grid[a][b] == null) ? camara.target : grid[a][b].transform;
 
-            grid[a][b].GetComponent<MeshRenderer>().material.color = Color.green;
-
-
-            camara.target = grid[a][b].transform;
             x = a;
             y = b;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))//derecha
         {
-
-            grid[a][b].GetComponent<MeshRenderer>().material.color = Color.white;
-
-
             b++;
-            b = Mathf.Clamp(b, 0, 19);
+            //b = Mathf.Clamp(b, 0, 19);
+            b = (b % 19 == 0) ? b - 1 : b;
 
-            grid[a][b].GetComponent<MeshRenderer>().enabled = true;
+            InstanciaHabitacion(a, b);//solo instancia si todavia hay tarjetas en la pila
+                                      //solo se mueve la camara por habitaciones creadas
+            camara.target = (grid[a][b] == null) ? camara.target : grid[a][b].transform;
 
-            grid[a][b].GetComponent<MeshRenderer>().material.color = Color.green;
 
-            camara.target = grid[a][b].transform;
             x = a;
             y = b;
         }

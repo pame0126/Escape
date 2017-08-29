@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 41935615}
   - component: {fileID: 41935614}
+  - component: {fileID: 41935616}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -130,14 +131,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 41935613}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8219fd30fab6b534cb309716e8bad452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   camara: {fileID: 761972512}
   hab_final: {fileID: 1482562895686880, guid: b9f8d18ec80b93a448a66c366f340d50, type: 2}
-  hab_inicio: {fileID: 1513717514175538, guid: 4b87d236e44034846ab043102496091f, type: 2}
+  hab_inicio: {fileID: 1723164565028526, guid: 3672711f8ace4544f90dae7a3e0291f9, type: 2}
   hab_3: {fileID: 1049087088546864, guid: 994a8cd1ac40c8a4aa35b3ce07ee72ce, type: 2}
   hab_4: {fileID: 1673815257690184, guid: 9fb61b40a943e3543ab8113cdb368ad0, type: 2}
   pilaTargHab: 
@@ -155,6 +156,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &41935616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 41935613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d2788af46a10941a456e9dc7fe4880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camara: {fileID: 761972512}
+  hab_final: {fileID: 1482562895686880, guid: b9f8d18ec80b93a448a66c366f340d50, type: 2}
+  hab_inicio: {fileID: 1513717514175538, guid: 4b87d236e44034846ab043102496091f, type: 2}
+  hab_3: {fileID: 1049087088546864, guid: 994a8cd1ac40c8a4aa35b3ce07ee72ce, type: 2}
+  hab_4: {fileID: 1673815257690184, guid: 9fb61b40a943e3543ab8113cdb368ad0, type: 2}
+  pilaTargHab: 
 --- !u!1 &260652908
 GameObject:
   m_ObjectHideFlags: 0

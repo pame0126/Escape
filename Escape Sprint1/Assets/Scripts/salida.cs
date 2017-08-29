@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class salida : MonoBehaviour {
+public class Salida : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
